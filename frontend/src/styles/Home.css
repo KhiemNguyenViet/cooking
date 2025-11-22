@@ -1,0 +1,59 @@
+.home-container {
+	min-height: 100vh;
+	background: linear-gradient(135deg, #fdf4f4 0%, #f8e8ee 100%);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+	font-family: 'Segoe UI', sans-serif;
+	overflow: hidden;
+}
+
+.home-image {
+	width: 100%;
+	max-width: 150px;
+	border-radius: 20px;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+	margin-bottom: 32px;
+}
+
+.home-title {
+	text-align: center;
+	font-size: 3.5rem;
+	color: #d63384;
+	margin: 0 0 16px 0;
+	text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+	text-align: center;
+}
+
+.home-description {
+	text-align: center;
+	font-size: 1.3rem;
+	color: #555;
+	max-width: 700px;
+	margin-bottom: 40px;
+	line-height: 1.6;
+	text-align: center;
+}
+
+.view-recipes-btn {
+	background: #e91e63;
+	color: white;
+	border: none;
+	padding: 16px 40px;
+	font-size: 1.3rem;
+	font-weight: 600;
+	border-radius: 50px;
+	cursor: pointer;
+	box-shadow: 0 6px 20px rgba(233, 30, 99, 0.3);
+	text-decoration: none;
+	display: inline-block;
+	transition: all 0.3s ease;
+}
+
+.view-recipes-btn:hover {
+	background: #c2185b;
+	transform: translateY(-3px);
+	box-shadow: 0 8px 25px rgba(233, 30, 99, 0.4);
+}

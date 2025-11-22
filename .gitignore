@@ -1,0 +1,7 @@
+frontend/.git
+frontend/node_modules
+target
+*.class
+.idea
+.vscode
+.DS_Store

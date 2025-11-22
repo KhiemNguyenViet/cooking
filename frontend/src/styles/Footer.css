@@ -1,0 +1,23 @@
+.footer {
+	background: #2c1a1d;
+	color: #f8e8ee;
+	padding: 40px 20px;
+	margin-top: auto;
+}
+
+.footer-container {
+	max-width: 1200px;
+	margin: 0 auto;
+	text-align: center;
+	font-size: 0.95rem;
+}
+
+.footer-container p {
+	margin: 8px 0;
+	opacity: 0.9;
+}
+
+.footer-container p:first-child {
+	font-weight: 600;
+	color: #f8b7cd;
+}
