@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import SEO from './SEO';
+import SchemaRecipe from './SchemaRecipe';
+import Checklist from './Checklist';
 import '../styles/RecipeDetail.css';
 
 function RecipeDetail() {
@@ -73,76 +76,80 @@ function RecipeDetail() {
 		return `${m}:${s < 10 ? '0' : ''}${s}`;
 	};
 
-	return (
-		<motion.div className="detail-page" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-			{!isGuiding ? (
-				// CHẾ ĐỘ XEM THƯỜNG
-				<>
-					<div className="detail-hero">
-						<img src={`http://localhost:8080${recipe.imageUrl}`} alt={recipe.title} className="detail-hero-img" />
-						<div className="hero-overlay">
-							<span className={`type-badge type-${recipe.type}`}>{recipe.type.toUpperCase()}</span>
-							<h1 className="detail-title">{recipe.title}</h1>
-							<p className="detail-desc">{recipe.shortDescription}</p>
+		return (
+			<main className="detail-page" itemScope itemType="https://schema.org/Recipe">
+				<SEO
+					title={`${recipe.title} - Công Thức Làm Bánh`}
+					description={recipe.shortDescription}
+					image={recipe.imageUrl ? `http://localhost:8080${recipe.imageUrl}` : ''}
+					url={window.location.href}
+				/>
+				<SchemaRecipe recipe={recipe} />
+				{!isGuiding ? (
+					// CHẾ ĐỘ XEM THƯỜNG
+					<>
+						<header className="detail-hero">
+							<img src={recipe.imageUrl ? `${recipe.imageUrl}` : ''} alt={recipe.title} className="detail-hero-img" itemProp="image" />
+							<div className="hero-overlay">
+								<span className={`type-badge type-${recipe.type}`}>{recipe.type.toUpperCase()}</span>
+								<h1 className="detail-title" itemProp="name">{recipe.title}</h1>
+								<p className="detail-desc" itemProp="description">{recipe.shortDescription}</p>
+							</div>
+						</header>
+						<article className="detail-content">
+							<section className="ingredients-section" itemProp="recipeIngredient">
+								<h2>Nguyên liệu</h2>
+								<pre className="ingredients-text">{recipe.ingredients}</pre>
+							</section>
+
+							{/* Checklist: split ingredients into array and pass to Checklist */}
+							<Checklist ingredients={(recipe.ingredients || '').split('\n').map(s => s.trim()).filter(Boolean)} />
+							<div className="start-button-container">
+								<motion.button
+									whileHover={{ scale: 1.08 }}
+									whileTap={{ scale: 0.95 }}
+									className="start-baking-btn"
+									onClick={startGuiding}
+								>
+									Bắt Đầu Làm Bánh Ngay!
+								</motion.button>
+							</div>
+						</article>
+					</>
+				) : (
+					// CHẾ ĐỘ HƯỚNG DẪN TỪNG BƯỚC
+					<section className="guiding-mode">
+						<div className="step-counter">
+							Bước {currentStep + 1} / {steps.length}
 						</div>
-					</div>
-
-					<div className="detail-content">
-						<div className="ingredients-section">
-							<h2>Nguyên liệu</h2>
-							<pre className="ingredients-text">{recipe.ingredients}</pre>
-						</div>
-
-						<div className="start-button-container">
-							<motion.button
-								whileHover={{ scale: 1.08 }}
-								whileTap={{ scale: 0.95 }}
-								className="start-baking-btn"
-								onClick={startGuiding}
-							>
-								Bắt Đầu Làm Bánh Ngay!
-							</motion.button>
-						</div>
-					</div>
-				</>
-			) : (
-				// CHẾ ĐỘ HƯỚNG DẪN TỪNG BƯỚC
-				<div className="guiding-mode">
-					<div className="step-counter">
-						Bước {currentStep + 1} / {steps.length}
-					</div>
-
-					{timer > 0 && (
-						<div className="timer-display">
-							{formatTime(timer)}
-						</div>
-					)}
-
-					<motion.div
-						key={currentStep}
-						initial={{ opacity: 0, x: 100 }}
-						animate={{ opacity: 1, x: 0 }}
-						className="step-content"
-					>
-						<h2>{steps[currentStep].description}</h2>
-					</motion.div>
-
-					<div className="step-controls">
-						<button onClick={prevStep} disabled={currentStep === 0} className="step-btn">← Bước trước</button>
-						{currentStep < steps.length - 1 ? (
-							<button onClick={nextStep} className="step-btn next">Tiếp theo →</button>
-						) : (
-							<button onClick={() => setIsGuiding(false)} className="step-btn finish">Hoàn thành!</button>
+						{timer > 0 && (
+							<div className="timer-display">
+								{formatTime(timer)}
+							</div>
 						)}
-					</div>
-				</div>
-			)}
-
-			<div className="detail-actions">
-				<Link to="/recipes" className="back-btn">Quay lại danh sách</Link>
-			</div>
-		</motion.div>
-	);
+						<motion.div
+							key={currentStep}
+							initial={{ opacity: 0, x: 100 }}
+							animate={{ opacity: 1, x: 0 }}
+							className="step-content"
+						>
+							<h2>{steps[currentStep].description}</h2>
+						</motion.div>
+						<div className="step-controls">
+							<button onClick={prevStep} disabled={currentStep === 0} className="step-btn">← Bước trước</button>
+							{currentStep < steps.length - 1 ? (
+								<button onClick={nextStep} className="step-btn next">Tiếp theo →</button>
+							) : (
+								<button onClick={() => setIsGuiding(false)} className="step-btn finish">Hoàn thành!</button>
+							)}
+						</div>
+					</section>
+				)}
+				<nav className="detail-actions">
+					<Link to="/recipes" className="back-btn">Quay lại danh sách</Link>
+				</nav>
+			</main>
+		);
 }
 
 export default RecipeDetail;

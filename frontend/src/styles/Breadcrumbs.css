@@ -1,0 +1,77 @@
+/* Breadcrumbs Navigation */
+.breadcrumbs {
+  background-color: white;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 12px 24px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.breadcrumbs ol {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.breadcrumbs li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.breadcrumbs li a {
+  color: #1e88e5;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
+}
+
+.breadcrumbs li a:hover {
+  color: #1565c0;
+  border-bottom-color: #1e88e5;
+}
+
+.breadcrumbs li a:active {
+  color: #0d47a1;
+}
+
+/* Separator (after each item except last) */
+.breadcrumbs li::after {
+  content: "/";
+  margin: 0 8px;
+  color: #bdbdbd;
+  font-weight: 300;
+}
+
+.breadcrumbs li:last-child::after {
+  content: "";
+  margin: 0;
+}
+
+/* Current/active page (last item) */
+.breadcrumbs li[aria-current="page"] {
+  color: #333;
+  font-weight: 600;
+}
+
+/* Responsive: stack on small screens */
+@media (max-width: 576px) {
+  .breadcrumbs {
+    padding: 10px 16px;
+  }
+
+  .breadcrumbs ol {
+    font-size: 0.85rem;
+  }
+
+  .breadcrumbs li a {
+    padding: 2px 0;
+  }
+}

@@ -1,8 +1,7 @@
 .recipes-container {
-	min-height: 100vh;
+	min-height: auto;
 	background: linear-gradient(135deg, #fdf4f4 0%, #f8e8ee 100%);
 	padding: 40px 20px;
-	font-family: 'Segoe UI', sans-serif;
 }
 
 .recipes-header {
