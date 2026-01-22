@@ -1,4 +1,5 @@
 import React from 'react';
+import { AuthProvider } from './context/AuthContext';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -9,13 +10,17 @@ import RecipeDetail from './components/RecipeDetail';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Breadcrumbs from './components/Breadcrumbs';
+import Login from './components/Login';
+import Register from './components/Register';
+import Admin from './components/Admin';
 
 function App() {
   const location = useLocation(); // Lấy URL hiện tại
   const hideLayout = location.pathname === '/';
 
   return (
-    <div className="app-root">
+    <AuthProvider>
+      <div className="app-root">
       {!hideLayout && <Header />}
       {!hideLayout && <Breadcrumbs />}
       <AnimatePresence mode="wait">
@@ -60,6 +65,45 @@ function App() {
           }
         />
         <Route
+          path="/login"
+          element={
+            <motion.div
+              initial={{ opacity: 0, x: -100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 100 }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+            >
+              <Login />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <motion.div
+              initial={{ opacity: 0, x: -100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 100 }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+            >
+              <Register />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <motion.div
+              initial={{ opacity: 0, x: -100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 100 }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+            >
+              <Admin />
+            </motion.div>
+          }
+        />
+        <Route
           path="*"
           element={
             <motion.div
@@ -78,7 +122,8 @@ function App() {
       </Routes>
       </AnimatePresence>
       {!hideLayout && <Footer />}
-    </div>
+      </div>
+    </AuthProvider>
   );
 }
 

@@ -103,7 +103,7 @@ function RecipeDetail() {
 							</section>
 
 							{/* Checklist: split ingredients into array and pass to Checklist */}
-							<Checklist ingredients={(recipe.ingredients || '').split('\n').map(s => s.trim()).filter(Boolean)} />
+							{/* <Checklist ingredients={(recipe.ingredients || '').split('\n').map(s => s.trim()).filter(Boolean)} /> */}
 							<div className="start-button-container">
 								<motion.button
 									whileHover={{ scale: 1.08 }}

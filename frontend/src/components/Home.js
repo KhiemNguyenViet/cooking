@@ -55,6 +55,13 @@ function Home() {
 						{displayDescription}
 					</motion.p>
 				</header>
+				<section aria-labelledby="home-intro" className="visually-hidden">
+					<h2 id="home-intro">Giới thiệu website công thức làm bánh</h2>
+					<p>
+						Tiệm Bánh Online là website chia sẻ công thức làm bánh tại nhà,
+						hướng dẫn chi tiết từng bước, phù hợp cho người mới bắt đầu.
+					</p>
+				</section>
 				{/* NÚT CÓ HIỆU ỨNG */}
 				<motion.div
 					whileHover={{ scale: 1.1 }}
